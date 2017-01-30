@@ -47,13 +47,15 @@ robot/robot_description
 
 ## Launch files, models and publishers association:
 **Specific:**
-* displayRobot.launch --> allow to display XSensURDF.urdf/XSensURDF.xml
-* joint_state_publisher.cpp --> allow to set the state, transforms and effort applied on XSensURDF.urdf/XSensURDF.xml
-* wrench_stamped_publisher.cpp --> allow to set the wrench applied on XSensURDF.urdf/XSensURDF.xml
-* displayPhantom.launch --> allow to display PhantomURDF.urdf
-* tf_phantomTransform_broadcaster.cpp --> allow to set the state, transforms and effort applied on PhantomURDF.xml
-* displayHalfPhantom.launch --> allow to display HalfPhantom.launch
-* tf_simpleTransform_broadcaster.cpp --> allow to set the state, transforms and effort applied on HalfPhantomURDF.xml
+* displayRobot.launch --> allows to display XSensURDF.urdf/XSensURDF.xml
+* joint_state_publisher.cpp --> allows to set the state, transforms and effort applied on XSensURDF.urdf/XSensURDF.xml
+* wrench_stamped_publisher.cpp --> allows to set the wrench applied on XSensURDF.urdf/XSensURDF.xml
+* displayPhantom.launch --> allows to display PhantomURDF.urdf
+* tf_phantomTransform_broadcaster.cpp --> allows to set the state, transforms and effort applied on PhantomURDF.xml
+* displayHalfPhantom.launch --> allows to display HalfPhantom.launch
+* tf_simpleTransform_broadcaster.cpp --> allows to set the state, transforms and effort applied on HalfPhantomURDF.xml
+* displayiCub.launch --> allows to display iCubGenova03.xml
+* icub_state_publisher.cpp --> allows to set the state, transforms and effort applied on iCubGenova03.xml
 * tf_broadcaster.cpp --> testing purpose
 
 **Generic:**
