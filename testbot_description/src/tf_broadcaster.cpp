@@ -285,24 +285,24 @@ int main(int argc, char **argv){
 
         //send transform
         //broadcaster.sendTransform(Pelvis_RightUpperLeg_f1);
-        broadcaster.sendTransform(RightUpperLeg_f1_RightUpperLeg_f2);
-        broadcaster.sendTransform(RightUpperLeg_f2_RightUpperLeg);
-        broadcaster.sendTransform(RightUpperLeg_RightLowerLeg_f1);
-        broadcaster.sendTransform(RightLowerLeg_f1_RightLowerLeg);
-        broadcaster.sendTransform(RightLowerLeg_RightFoot_f1);
-        broadcaster.sendTransform(RightFoot_f1_RightFoot_f2);
-        broadcaster.sendTransform(RightFoot_f2_RightFoot);
-        broadcaster.sendTransform(RightFoot_RightToe);
-
-        broadcaster.sendTransform(Pelvis_LeftUpperLeg_f1);
-        broadcaster.sendTransform(LeftUpperLeg_f1_LeftUpperLeg_f2);
-        broadcaster.sendTransform(LeftUpperLeg_f2_LeftUpperLeg);
-        broadcaster.sendTransform(LeftUpperLeg_LeftLowerLeg_f1);
-        broadcaster.sendTransform(LeftLowerLeg_f1_LeftLowerLeg);
-        broadcaster.sendTransform(LeftLowerLeg_LeftFoot_f1);
-        broadcaster.sendTransform(LeftFoot_f1_LeftFoot_f2);
-        broadcaster.sendTransform(LeftFoot_f2_LeftFoot);
-        broadcaster.sendTransform(LeftFoot_LeftToe);
+//         broadcaster.sendTransform(RightUpperLeg_f1_RightUpperLeg_f2);
+//         broadcaster.sendTransform(RightUpperLeg_f2_RightUpperLeg);
+//         broadcaster.sendTransform(RightUpperLeg_RightLowerLeg_f1);
+//         broadcaster.sendTransform(RightLowerLeg_f1_RightLowerLeg);
+//         broadcaster.sendTransform(RightLowerLeg_RightFoot_f1);
+//         broadcaster.sendTransform(RightFoot_f1_RightFoot_f2);
+//         broadcaster.sendTransform(RightFoot_f2_RightFoot);
+//         broadcaster.sendTransform(RightFoot_RightToe);
+//
+//         broadcaster.sendTransform(Pelvis_LeftUpperLeg_f1);
+//         broadcaster.sendTransform(LeftUpperLeg_f1_LeftUpperLeg_f2);
+//         broadcaster.sendTransform(LeftUpperLeg_f2_LeftUpperLeg);
+//         broadcaster.sendTransform(LeftUpperLeg_LeftLowerLeg_f1);
+//         broadcaster.sendTransform(LeftLowerLeg_f1_LeftLowerLeg);
+//         broadcaster.sendTransform(LeftLowerLeg_LeftFoot_f1);
+//         broadcaster.sendTransform(LeftFoot_f1_LeftFoot_f2);
+//         broadcaster.sendTransform(LeftFoot_f2_LeftFoot);
+//         broadcaster.sendTransform(LeftFoot_LeftToe);
 
         // This will adjust as needed per iteration
         loop_rate.sleep();

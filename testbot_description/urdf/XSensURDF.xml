@@ -603,7 +603,6 @@
                 <cylinder length="0.40926" radius="-0.051595"/>
             </geometry>
         </collision>
-
     </link>
     <link name="LeftLowerLeg_f1">
         <inertial>

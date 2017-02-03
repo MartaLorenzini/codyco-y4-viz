@@ -100,7 +100,7 @@ int main(int argc, char **argv){
         if (wrench<-50 || wrench>50) wrench_inc *= -1;
 
         // Send the joint state
-        joint_pub.publish(joint_state);
+        //joint_pub.publish(joint_state);
 
         // update transform
         // (moving in a circle with radius=2)
