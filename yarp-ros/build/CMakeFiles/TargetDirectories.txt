@@ -1,0 +1,5 @@
+/home/mlorenzini/cmake/yarp-ros/build/CMakeFiles/edit_cache.dir
+/home/mlorenzini/cmake/yarp-ros/build/CMakeFiles/yarp_wrench_stamped_publisher.dir
+/home/mlorenzini/cmake/yarp-ros/build/CMakeFiles/yarp_icub_state_publisher.dir
+/home/mlorenzini/cmake/yarp-ros/build/CMakeFiles/listener.dir
+/home/mlorenzini/cmake/yarp-ros/build/CMakeFiles/rebuild_cache.dir
