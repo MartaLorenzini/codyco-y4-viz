@@ -15,6 +15,10 @@
             <geometry>
                 <box size="0.13409     0.23961    0.096443"/>
             </geometry>
+            <material name="metal">
+                <texture />
+                <color rgba="0.8 0.9 0.9 1" />
+            </material>
         </visual>
 
         <collision>
@@ -44,6 +48,7 @@
             <geometry>
                 <box size="0.13409     0.15843     0.10065"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -73,6 +78,7 @@
             <geometry>
                 <box size="0.13409     0.15843     0.09093"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -102,6 +108,7 @@
             <geometry>
                 <box size="0.13409     0.15843     0.09093"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -138,6 +145,7 @@
             <geometry>
                 <box size="0.13831    0.052514     0.12577"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -174,6 +182,7 @@
             <geometry>
                 <cylinder length="0.084696" radius="0.013739"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -203,6 +212,7 @@
             <geometry>
                 <sphere radius="0.080693"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -226,6 +236,7 @@
             <geometry>
                 <cylinder length="0.12632" radius="0.022874"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -262,6 +273,7 @@
             <geometry>
                 <cylinder length="0.28083" radius="0.030503"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -291,6 +303,7 @@
             <geometry>
                 <cylinder length="0.23018" radius="0.020336"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -320,6 +333,7 @@
             <geometry>
                 <box size="0.11471     0.17207    0.040671"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -342,6 +356,7 @@
             <geometry>
                 <cylinder length="0.12632" radius="0.022874"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -378,6 +393,7 @@
             <geometry>
                 <cylinder length="0.28083" radius="0.030503"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -407,6 +423,7 @@
             <geometry>
                 <cylinder length="0.23018" radius="0.020336"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -436,6 +453,7 @@
             <geometry>
                 <box size="0.11471     0.17207    0.040671"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -472,6 +490,7 @@
             <geometry>
                 <cylinder length="0.40926" radius="0.051595"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -501,6 +520,7 @@
             <geometry>
                 <cylinder length="0.42811" radius="0.039293"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -537,6 +557,7 @@
             <geometry>
                 <box size="0.17387    0.078587    0.091847"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -559,6 +580,7 @@
             <geometry>
                 <box size="0.066123    0.078587    0.014689"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -595,6 +617,7 @@
             <geometry>
                 <cylinder length="0.40926" radius="-0.051595"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -623,6 +646,7 @@
             <geometry>
                 <cylinder length="0.42811" radius="0.039293"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -659,6 +683,7 @@
             <geometry>
                 <box size="0.17387    0.078587    0.091847"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>
@@ -681,6 +706,7 @@
             <geometry>
                 <box size="0.066123    0.078587    0.014689"/>
             </geometry>
+            <material name="metal"/>
         </visual>
 
         <collision>

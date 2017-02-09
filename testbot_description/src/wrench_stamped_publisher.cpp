@@ -18,11 +18,11 @@ int main(int argc, char **argv){
     ros::NodeHandle n;
 
     ros::Publisher wrench_pub = n.advertise<geometry_msgs::WrenchStamped>("wrench_stamped", 1);
-    ros::Rate loop_rate(30);
+    ros::Rate loop_rate(100);
 
     // message declarations
     geometry_msgs::WrenchStamped wrenchMsg;
-    ros::param::param<std::string>("~frame_id", wrenchMsg.header.frame_id, "LeftFoot");
+    ros::param::param<std::string>("~frame_id", wrenchMsg.header.frame_id, "ground");
     //wrenchMsg.header.frame_id="wrench_stamped_frame_id";
 
     double null_F = 0, null_M = 0;

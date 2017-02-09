@@ -10,7 +10,7 @@ int main(int argc, char **argv){
     ros::NodeHandle n;
 
     tf::TransformBroadcaster broadcaster;
-    ros::Rate loop_rate(30);
+    ros::Rate loop_rate(240);
 
     const double degree = M_PI/180;
 
@@ -18,15 +18,18 @@ int main(int argc, char **argv){
     double null = 0, w = 1.0;
     double tx_m = -0.000075, tz_m = 0.09681;
 
+    //Right
     double tx_a = 0.000037, ty_a = -0.079215, tz_a = 0.000367;
     double tx_d = -0.000002, tz_d = -0.40926;
     double tx_e = -0.000373, tz_e = -0.42811;
     double tx_f = 0.13428, tz_f = -0.078689;
 
+    //Left
     double tx_g = 0.000037, ty_g = 0.079215, tz_g = 0.000367;
     double tx_h = -0.000002, tz_h = -0.40926;
     double tx_i = -0.000373, tz_i = -0.42811;
     double tx_l = 0.13428, tz_l = -0.078689;
+
     double tx_n = -0.13428, tz_n = 0.078689;
 
     // message declarations

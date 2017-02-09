@@ -56,7 +56,12 @@ robot/robot_description
 * tf_simpleTransform_broadcaster.cpp --> allows to set the state, transforms and effort applied on HalfPhantomURDF.xml
 * displayiCub.launch --> allows to display iCubGenova03.xml
 * icub_state_publisher.cpp --> allows to set the state, transforms and effort applied on iCubGenova03.xml
+* icub_wrenchLeft_publisher.cpp --> allows to set the wrench applied on the left arm of iCubGenova03.xml
+* icub_wrenchRight_publisher.cpp --> allows to set the wrench applied on the right arm of iCubGenova03.xml
 * tf_broadcaster.cpp --> testing purpose
+
+* displayHRI.launch --> allow to display XSensURDF.urdf/XSensURDF.xml and iCubGenova03.xml simultaneously
+* displayicubYARP.launch --> allow to launch robot_state_publisher alone in order to test yarp icub_publisher
 
 **Generic:**
 * displayR2D2.launch --> allow to display any urdf or xml
