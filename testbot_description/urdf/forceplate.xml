@@ -1,0 +1,212 @@
+
+<robot name="forceplates">
+
+    <link name="ground">
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+            <origin/>
+        </inertial>
+
+        <collision>
+            <origin xyz="0.23 -0.11 -0.09" />
+            <geometry>
+                <box size="0.464 0.508 0.1" />
+            </geometry>
+            <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+        </collision>
+    </link>
+
+    <joint name="ground_forceplate1" type="fixed">
+        <origin xyz="0.23 -0.11 -0.09" rpy='0 0 0.0872'/>
+        <parent link="ground"/>
+        <child link="forceplate1"/>
+    </joint>
+
+    <link name="forceplate1">
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+            <origin/>
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <box size="0.464 0.508 0.1" />
+            </geometry>
+            <material name="yellow">
+                <color rgba="0.8 0.9 1 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <box size="0.464 0.508 0.1" />
+            </geometry>
+            <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+        </collision>
+    </link>
+
+    <joint name="forceplate1_forceplate2" type="fixed">
+        <origin xyz="0 0.508 0" />
+        <parent link="forceplate1"/>
+        <child link="forceplate2"/>
+    </joint>
+
+    <link name="forceplate2">
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+            <origin/>
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <box size="0.464 0.508 0.1" />
+            </geometry>
+            <material name="bluefp">
+                <color rgba="0.8 1 0.9 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <box size="0.464 0.508 0.1" />
+            </geometry>
+            <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+        </collision>
+    </link>
+
+    <joint name="forceplate2_boarding1" type="fixed">
+        <origin xyz="0 0.274 0" />
+        <parent link="forceplate2"/>
+        <child link="boarding1"/>
+    </joint>
+
+    <link name="boarding1">
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+            <origin/>
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <box size="0.544 0.04 0.1" />
+            </geometry>
+            <material name="black">
+                <color rgba="0 0.1 0.2 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <box size="0.544 0.04 0.1" />
+            </geometry>
+            <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+        </collision>
+    </link>
+
+    <joint name="boarding1_boarding2" type="fixed">
+        <origin xyz="0.252 -0.528 0" />
+        <parent link="boarding1"/>
+        <child link="boarding2"/>
+    </joint>
+
+    <link name="boarding2">
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+            <origin/>
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <box size="0.04 1.016 0.1" />
+            </geometry>
+            <material name="black">
+                <color rgba="0 0.1 0.2 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <box size="0.04 1.016 0.1" />
+            </geometry>
+            <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+        </collision>
+    </link>
+
+    <joint name="boarding1_boarding3" type="fixed">
+        <origin xyz="-0.252 -0.528 0" />
+        <parent link="boarding1"/>
+        <child link="boarding3"/>
+    </joint>
+
+    <link name="boarding3">
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+            <origin/>
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <box size="0.04 1.016 0.1" />
+            </geometry>
+            <material name="black">
+                <color rgba="0 0.1 0.2 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <box size="0.04 1.016 0.1" />
+            </geometry>
+            <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+        </collision>
+    </link>
+
+    <joint name="boarding2_boarding4" type="fixed">
+        <origin xyz="-0.252 -0.528 0" />
+        <parent link="boarding2"/>
+        <child link="boarding4"/>
+    </joint>
+
+    <link name="boarding4">
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+            <origin/>
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <box size="0.544 0.04 0.1" />
+            </geometry>
+            <material name="black">
+                <color rgba="0 0.1 0.2 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" />
+            <geometry>
+                <box size="0.544 0.04 0.1" />
+            </geometry>
+            <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+        </collision>
+    </link>
+
+</robot>

@@ -1,0 +1,32 @@
+
+<robot name="robot">
+    <!--To open this model with Gazebo replace the null masses, inertias and dimensions of the 'fake links f1 and f2'-->
+
+    <!--LINKS-->
+    <link name="Pelvis">
+        <inertial>
+            <mass value="4.9652"/>
+            <origin xyz="0           0    0.048589" rpy="0 0 0" />
+            <inertia ixx="0.027604" iyy="0.011288" izz="0.031195" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+
+        <visual>
+            <origin xyz="0           0    0.048589" rpy="0 0 0" />
+            <geometry>
+                <box size="0.13409     0.23961    0.096443"/>
+            </geometry>
+            <material name="metal">
+                <texture />
+                <color rgba="0.8 0.9 0.9 1" />
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz="0           0    0.048589" rpy="0 0 0" />
+            <geometry>
+                <box size="0.13409     0.23961    0.096443"/>
+            </geometry>
+        </collision>
+    </link>
+
+</robot>

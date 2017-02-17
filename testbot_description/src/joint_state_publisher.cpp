@@ -37,8 +37,8 @@ int main(int argc, char **argv){
     iDynTree::MatrixDynSize humanStateQi = matrixFromMatlabExtractor_byString("human_state.mat","human_state/q");
 
     //LOAD OF mu_dgiveny.mat
-    iDynTree::MatrixDynSize mu_dgiveny_i = matrixFromMatlabExtractor_byString("mu_dgiveny.mat","mu_dgiven_y/mu_dgiveny_ALLsens");
-    
+    iDynTree::MatrixDynSize mu_dgiveny_i = matrixFromMatlabExtractor_byString("mu_dgiveny.mat","mu_dgiveny/mu_dgiveny_ALLsens");
+
     //LOAD OF suit.mat
     std::vector< iDynTree::MatrixDynSize > linksPositions = suitLinksFromMatlabExtractor_byString("suit.mat","suit/links");
     std::vector< iDynTree::MatrixDynSize > linksQuaternions = suitQuaternionsFromMatlabExtractor_byString("suit.mat","suit/links");
@@ -53,10 +53,13 @@ int main(int argc, char **argv){
 
     // declarations
     int i =0, j = 0;
-    // Pelvis to Left Foot transform data
+    // Pelvis to LeftFoot transform data
     double tx_1 = 0.000037, ty_1 = 0.079215, tz_1 = 0.000367;
     double tx_2 = -0.000002, tz_2 = -0.40926;
     double tx_3 = -0.000373, tz_3 = -0.42811;
+
+    // LeftFoot to pointFP transform data
+    double tz_4 = -0.091847;
 
     // message declarations
     sensor_msgs::JointState joint_state;
@@ -68,6 +71,10 @@ int main(int argc, char **argv){
     geometry_msgs::TransformStamped ground_to_LeftFoot;
     ground_to_LeftFoot.header.frame_id = "ground";
     ground_to_LeftFoot.child_frame_id = "LeftFoot";
+
+    geometry_msgs::TransformStamped LeftFoot_to_pointFP;
+    LeftFoot_to_pointFP.header.frame_id = "LeftFoot";
+    LeftFoot_to_pointFP.child_frame_id = "pointFP";
 
     geometry_msgs::TransformStamped Pelvis_to_LeftFoot;
     Pelvis_to_LeftFoot.header.frame_id = "Pelvis";
@@ -158,11 +165,26 @@ int main(int argc, char **argv){
         ground_to_Pelvis.transform.translation.x = linksPositions[0].getVal(0,j);
         ground_to_Pelvis.transform.translation.y = linksPositions[0].getVal(1,j);
         ground_to_Pelvis.transform.translation.z = linksPositions[0].getVal(2,j);
+        iDynTree::Position ground_to_Pelvis_pos  (ground_to_Pelvis.transform.translation.x,
+                                                  ground_to_Pelvis.transform.translation.y,
+                                                  ground_to_Pelvis.transform.translation.z);
         ground_to_Pelvis.transform.rotation.x = linksQuaternions[0].getVal(1,j);
         ground_to_Pelvis.transform.rotation.y = linksQuaternions[0].getVal(2,j);
         ground_to_Pelvis.transform.rotation.z = linksQuaternions[0].getVal(3,j);
         ground_to_Pelvis.transform.rotation.w = linksQuaternions[0].getVal(0,j);
+        iDynTree::Vector4 ground_to_Pelvis_quat;
+        ground_to_Pelvis_quat.setVal(0,ground_to_Pelvis.transform.rotation.w);
+        ground_to_Pelvis_quat.setVal(1,ground_to_Pelvis.transform.rotation.x);
+        ground_to_Pelvis_quat.setVal(2,ground_to_Pelvis.transform.rotation.y);
+        ground_to_Pelvis_quat.setVal(3,ground_to_Pelvis.transform.rotation.z);
+        iDynTree::Rotation ground_to_Pelvis_rot;
+        ground_to_Pelvis_rot.fromQuaternion(ground_to_Pelvis_quat);
+        iDynTree::Transform ground_to_Pelvis_i(ground_to_Pelvis_rot,ground_to_Pelvis_pos);
 
+        // ground to LeftFoot transform
+        ground_to_LeftFoot.transform.translation.x = linksPositions[22].getVal(0,j);
+        ground_to_LeftFoot.transform.translation.y = linksPositions[22].getVal(1,j);
+        ground_to_LeftFoot.transform.translation.z = linksPositions[22].getVal(2,j);
         iDynTree::Position ground_to_LeftFoot_pos  (ground_to_LeftFoot.transform.translation.x,
                                                     ground_to_LeftFoot.transform.translation.y,
                                                     ground_to_LeftFoot.transform.translation.z);
@@ -201,6 +223,23 @@ int main(int argc, char **argv){
         iDynTree::Transform Pelvis_to_LeftFoot_i(Pelvis_to_LeftFoot_rot,Pelvis_to_LeftFoot_pos);
         iDynTree::Transform LeftFoot_to_Pelvis_i;
         LeftFoot_to_Pelvis_i = Pelvis_to_LeftFoot_i.inverse();
+
+        // LeftFoot to pointFP
+        iDynTree::Position LeftFoot_to_pointFP_pos (0, 0, tz_4);
+        iDynTree::Rotation LeftFoot_to_pointFP_rot (1, 0, 0,
+                                                   0, 1, 0,
+                                                   0, 0, 1);
+        iDynTree::Transform LeftFoot_to_pointFP_i(LeftFoot_to_pointFP_rot,LeftFoot_to_pointFP_pos);
+
+        // ground to pointFP
+        iDynTree::Transform ground_to_pointFP_i;
+        ground_to_pointFP_i = ground_to_LeftFoot_i*(LeftFoot_to_pointFP_i);
+        iDynTree::Matrix4x4 ground_to_pointFP_H;
+        ground_to_pointFP_H = ground_to_pointFP_i.asHomogeneousTransform();
+        //std::cerr << "ground_to_pointFP:" << ground_to_pointFP_H.getVal(1,3) << std::endl;
+        iDynTree::Matrix4x4 ground_to_LeftFoot_H;
+        ground_to_LeftFoot_H = ground_to_LeftFoot_i.asHomogeneousTransform();
+        //std::cerr << "ground_to_LeftFoot:" << ground_to_LeftFoot_H.getVal(1,3) << std::endl;
 
         // ground to Pelvis alternative transform
         iDynTree::Transform ground_to_base_i;
@@ -501,7 +540,7 @@ inline iDynTree::MatrixDynSize matrixFromMatlabExtractor_byString(std::string ma
     iDynTree::assertTrue(matVar != NULL);
 
     switch(n){
-    
+
         case (2):
         {
             fieldName = matFields[1].c_str();
@@ -706,103 +745,103 @@ inline iDynTree::MatrixDynSize matrixFromMatlabExtractor(std::string matName, in
 }
 
 inline std::vector< iDynTree::MatrixDynSize > suitLinksFromMatlabExtractor_byString(std::string matVarName, std::string matVarString){
-    
+
     std::vector<std::string> matFields = split(matVarString, '/');
     int n = matFields.size();
     const char *varName = matFields[0].c_str();
     const char *fieldName = matFields[1].c_str();
-    
+
     mat_t *pSuit;
     pSuit = Mat_Open(getAbsModelPath(matVarName).c_str(),MAT_ACC_RDONLY);
     iDynTree::assertTrue(pSuit!=NULL);
-    
+
     matvar_t *suitVar;
     suitVar = Mat_VarRead(pSuit,varName);
     iDynTree::assertTrue(suitVar != NULL);
-    
-    
+
+
     matvar_t *linksVar;
     linksVar = Mat_VarGetStructFieldByName(suitVar,fieldName,0);
     iDynTree::assertTrue(linksVar != NULL);
-    
-    matvar_t *linkCell; 
+
+    matvar_t *linkCell;
     std::vector< std::string > linksName;
     linksName.resize(linksVar->dims[0]);
-    
+
     std::vector< iDynTree::MatrixDynSize > linksPositions;
     linksPositions.resize(linksVar->dims[0]);
-    
+
     matvar_t *temp;
     matvar_t *tempMeas;
-    
+
     for(int i=0; i < linksVar->dims[0] ;++i){
-	
+
 	linkCell = Mat_VarGetCell(linksVar, i);
-	
+
 	//Get Name
 	temp = Mat_VarGetStructFieldByName(linkCell,"label", 0);
 	iDynTree::assertTrue(temp != NULL);
 	linksName[i] =(char*) temp->data;
-	
+
 	//Get meas
 	tempMeas = Mat_VarGetStructFieldByName(linkCell,"meas", 0);
 	iDynTree::assertTrue(tempMeas != NULL);
-	
+
 	//Get positions
 	temp = Mat_VarGetStructFieldByName(tempMeas,"position", 0);
 	iDynTree::assertTrue(temp != NULL);
 	Eigen::Map< Eigen::MatrixXd > tempMapPosition((double*)temp->data, temp->dims[0], temp->dims[1]);
 	linksPositions[i].resize(temp->dims[0], temp->dims[1]);
 	toEigen(linksPositions[i]) = tempMapPosition;
-	
+
     }
-    
+
     return linksPositions;
-    
+
 }
 inline std::vector< iDynTree::MatrixDynSize > suitQuaternionsFromMatlabExtractor_byString(std::string matVarName, std::string matVarString){
-    
+
     std::vector<std::string> matFields = split(matVarString, '/');
     int n = matFields.size();
     const char *varName = matFields[0].c_str();
     const char *fieldName = matFields[1].c_str();
-    
+
     mat_t *pSuit;
     pSuit = Mat_Open(getAbsModelPath(matVarName).c_str(),MAT_ACC_RDONLY);
     iDynTree::assertTrue(pSuit!=NULL);
-    
+
     matvar_t *suitVar;
     suitVar = Mat_VarRead(pSuit,varName);
     iDynTree::assertTrue(suitVar != NULL);
-    
-    
+
+
     matvar_t *linksVar;
     linksVar = Mat_VarGetStructFieldByName(suitVar,fieldName,0);
     iDynTree::assertTrue(linksVar != NULL);
-    
+
     matvar_t *linkCell;
     std::vector< std::string > linksName;
     linksName.resize(linksVar->dims[0]);
-    
+
     std::vector< iDynTree::MatrixDynSize > linksQuaternions;
     linksQuaternions.resize(linksVar->dims[0]);
-    
+
     matvar_t *temp;
     matvar_t *tempMeas;
-    
+
     for(int i=0; i < linksVar->dims[0] ;++i){
-	
+
 	linkCell = Mat_VarGetCell(linksVar, i);
-	
+
 	//Get Name
 	temp = Mat_VarGetStructFieldByName(linkCell,"label", 0);
 	iDynTree::assertTrue(temp != NULL);
 	linksName[i] =(char*) temp->data;
-	
+
 	//Get meas
 	tempMeas = Mat_VarGetStructFieldByName(linkCell,"meas", 0);
 	iDynTree::assertTrue(tempMeas != NULL);
-	
+
 	//Get orientations
 	temp = Mat_VarGetStructFieldByName(tempMeas,"orientation", 0);
 	iDynTree::assertTrue(temp != NULL);
@@ -810,9 +849,9 @@ inline std::vector< iDynTree::MatrixDynSize > suitQuaternionsFromMatlabExtractor
 	linksQuaternions[i].resize(temp->dims[0], temp->dims[1]);
 	toEigen(linksQuaternions[i]) = tempMapOrientation;
     }
-    
+
     return linksQuaternions;
-    
+
 }
 
 

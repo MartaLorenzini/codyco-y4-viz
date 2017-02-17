@@ -1,4 +1,10 @@
 <launch>
+    <group ns="fp_wrenchRight">
+        <node name="fp_wrenchRight_publisher" pkg="testbot_description" type="fp_wrenchRight_publisher" />
+    </group>
+    <group ns="fp_wrenchLeft">
+        <node name="fp_wrenchLeft_publisher" pkg="testbot_description" type="fp_wrenchLeft_publisher" />
+    </group>
     <group ns="icub">
         <arg name="robotModel" />
         <arg name="gui" default="False" />
@@ -24,10 +30,19 @@
         <param name="publish_default_effort"  value="$(arg eff)" />
         <node name="wrench_stamped_publisher" pkg="testbot_description" type="wrench_stamped_publisher" />
     </group>
-    <group ns="wrenchRight">
+    <group ns="icub_wrenchRight">
         <node name="icub_wrenchRight_publisher" pkg="testbot_description" type="icub_wrenchRight_publisher" />
     </group>
-    <group ns="wrenchLeft">
+    <group ns="icub_wrenchLeft">
         <node name="icub_wrenchLeft_publisher" pkg="testbot_description" type="icub_wrenchLeft_publisher" />
     </group>
+    <group ns="fp">
+        <arg name="fpModel" />
+        <arg name="gui" default="False" />
+        <param name="robot_description" textfile="$(arg fpModel)"  />
+        <param name="use_gui" value="$(arg gui)"/>
+        <node name="state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    </group>
+
 </launch>

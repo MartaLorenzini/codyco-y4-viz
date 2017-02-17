@@ -52,6 +52,8 @@ add_executable(tf_phantomTransform_broadcaster src/tf_phantomTransform_broadcast
 add_executable(icub_state_publisher src/icub_state_publisher.cpp)
 add_executable(icub_wrenchLeft_publisher src/icub_wrenchLeft_publisher.cpp)
 add_executable(icub_wrenchRight_publisher src/icub_wrenchRight_publisher.cpp)
+add_executable(fp_wrenchLeft_publisher src/fp_wrenchLeft_publisher.cpp)
+add_executable(fp_wrenchRight_publisher src/fp_wrenchRight_publisher.cpp)
 
 # add_dependencies
 add_dependencies(joint_state_publisher testbot_description_generate_messages_cpp)
@@ -62,6 +64,8 @@ add_dependencies(tf_phantomTransform_broadcaster testbot_description_generate_me
 add_dependencies(icub_state_publisher testbot_description_generate_messages_cpp)
 add_dependencies(icub_wrenchLeft_publisher testbot_description_generate_messages_cpp)
 add_dependencies(icub_wrenchRight_publisher testbot_description_generate_messages_cpp)
+add_dependencies(fp_wrenchLeft_publisher testbot_description_generate_messages_cpp)
+add_dependencies(fp_wrenchRight_publisher testbot_description_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(joint_state_publisher ${catkin_LIBRARIES} ${iDynTree_LIBRARIES} ${MATIO_LIBRARIES} ${IPOPT_LIBRARIES})
@@ -72,3 +76,5 @@ target_link_libraries(tf_phantomTransform_broadcaster ${catkin_LIBRARIES})
 target_link_libraries(icub_state_publisher ${catkin_LIBRARIES} ${iDynTree_LIBRARIES} ${MATIO_LIBRARIES} ${IPOPT_LIBRARIES})
 target_link_libraries(icub_wrenchLeft_publisher ${catkin_LIBRARIES} ${iDynTree_LIBRARIES} ${MATIO_LIBRARIES} ${IPOPT_LIBRARIES})
 target_link_libraries(icub_wrenchRight_publisher ${catkin_LIBRARIES} ${iDynTree_LIBRARIES} ${MATIO_LIBRARIES} ${IPOPT_LIBRARIES})
+target_link_libraries(fp_wrenchLeft_publisher ${catkin_LIBRARIES} ${iDynTree_LIBRARIES} ${MATIO_LIBRARIES} ${IPOPT_LIBRARIES})
+target_link_libraries(fp_wrenchRight_publisher ${catkin_LIBRARIES} ${iDynTree_LIBRARIES} ${MATIO_LIBRARIES} ${IPOPT_LIBRARIES})

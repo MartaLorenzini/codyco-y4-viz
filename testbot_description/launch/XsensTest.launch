@@ -1,0 +1,27 @@
+<launch>
+    <group ns="tile">
+        <arg name="tileModel" />
+        <arg name="gui" default="False" />
+        <arg name="vel" default="True" />
+        <arg name="eff" default="True" />
+        <param name="robot_description" textfile="$(arg tileModel)"  />
+        <param name="use_gui" value="$(arg gui)"/>
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+        <param name="publish_default_velocities"  value="$(arg vel)" />
+        <param name="publish_default_effort"  value="$(arg eff)" />
+    </group>
+    <group ns="human">
+        <arg name="humanModel" />
+        <arg name="gui" default="False" />
+        <arg name="vel" default="True" />
+        <arg name="eff" default="True" />
+        <param name="robot_description" textfile="$(arg humanModel)"  />
+        <param name="use_gui" value="$(arg gui)"/>
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+        <node name="joint_state_publisher" pkg="testbot_description" type="joint_state_publisher" />
+        <param name="publish_default_velocities"  value="$(arg vel)" />
+        <param name="publish_default_effort"  value="$(arg eff)" />
+        <node name="wrench_stamped_publisher" pkg="testbot_description" type="wrench_stamped_publisher" />
+    </group>
+</launch>

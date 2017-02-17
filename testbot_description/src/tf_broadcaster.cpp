@@ -33,9 +33,9 @@ int main(int argc, char **argv){
     double tx_n = -0.13428, tz_n = 0.078689;
 
     // message declarations
-    geometry_msgs::TransformStamped Pelvis_L5_f1;
-    Pelvis_L5_f1.header.frame_id = "Pelvis";
-    Pelvis_L5_f1.child_frame_id = "L5_f1";
+    geometry_msgs::TransformStamped ground_to_Pelvis;
+    ground_to_Pelvis.header.frame_id = "ground";
+    ground_to_Pelvis.child_frame_id = "Pelvis";
 
     geometry_msgs::TransformStamped Pelvis_RightUpperLeg_f1;
     Pelvis_RightUpperLeg_f1.header.frame_id = "Pelvis";
@@ -111,16 +111,16 @@ int main(int argc, char **argv){
 
     while (ros::ok()){
 
-        //update trasform
+        ground_to_Pelvis.header.stamp = ros::Time::now();
+        ground_to_Pelvis.transform.translation.x = null;
+        ground_to_Pelvis.transform.translation.y = null;
+        ground_to_Pelvis.transform.translation.z = null;
+        ground_to_Pelvis.transform.rotation.x = null;
+        ground_to_Pelvis.transform.rotation.y = null;
+        ground_to_Pelvis.transform.rotation.z = null;
+        ground_to_Pelvis.transform.rotation.w = w;
 
-        Pelvis_L5_f1.header.stamp = ros::Time::now();
-        Pelvis_L5_f1.transform.translation.x = tx_m;
-        Pelvis_L5_f1.transform.translation.y = null;
-        Pelvis_L5_f1.transform.translation.z = tz_m;
-        Pelvis_L5_f1.transform.rotation.x = null;
-        Pelvis_L5_f1.transform.rotation.y = null;
-        Pelvis_L5_f1.transform.rotation.z = null;
-        Pelvis_L5_f1.transform.rotation.w = w;
+        //update trasform
 
         //Left Leg
         Pelvis_RightUpperLeg_f1.header.stamp = ros::Time::now();
@@ -287,25 +287,27 @@ int main(int argc, char **argv){
         LeftFoot_LeftToe.transform.rotation.w = w;
 
         //send transform
-        //broadcaster.sendTransform(Pelvis_RightUpperLeg_f1);
-//         broadcaster.sendTransform(RightUpperLeg_f1_RightUpperLeg_f2);
-//         broadcaster.sendTransform(RightUpperLeg_f2_RightUpperLeg);
-//         broadcaster.sendTransform(RightUpperLeg_RightLowerLeg_f1);
-//         broadcaster.sendTransform(RightLowerLeg_f1_RightLowerLeg);
-//         broadcaster.sendTransform(RightLowerLeg_RightFoot_f1);
-//         broadcaster.sendTransform(RightFoot_f1_RightFoot_f2);
-//         broadcaster.sendTransform(RightFoot_f2_RightFoot);
-//         broadcaster.sendTransform(RightFoot_RightToe);
-//
-//         broadcaster.sendTransform(Pelvis_LeftUpperLeg_f1);
-//         broadcaster.sendTransform(LeftUpperLeg_f1_LeftUpperLeg_f2);
-//         broadcaster.sendTransform(LeftUpperLeg_f2_LeftUpperLeg);
-//         broadcaster.sendTransform(LeftUpperLeg_LeftLowerLeg_f1);
-//         broadcaster.sendTransform(LeftLowerLeg_f1_LeftLowerLeg);
-//         broadcaster.sendTransform(LeftLowerLeg_LeftFoot_f1);
-//         broadcaster.sendTransform(LeftFoot_f1_LeftFoot_f2);
-//         broadcaster.sendTransform(LeftFoot_f2_LeftFoot);
-//         broadcaster.sendTransform(LeftFoot_LeftToe);
+        broadcaster.sendTransform(ground_to_Pelvis);
+
+        broadcaster.sendTransform(Pelvis_RightUpperLeg_f1);
+        broadcaster.sendTransform(RightUpperLeg_f1_RightUpperLeg_f2);
+        broadcaster.sendTransform(RightUpperLeg_f2_RightUpperLeg);
+        broadcaster.sendTransform(RightUpperLeg_RightLowerLeg_f1);
+        broadcaster.sendTransform(RightLowerLeg_f1_RightLowerLeg);
+        broadcaster.sendTransform(RightLowerLeg_RightFoot_f1);
+        broadcaster.sendTransform(RightFoot_f1_RightFoot_f2);
+        broadcaster.sendTransform(RightFoot_f2_RightFoot);
+        broadcaster.sendTransform(RightFoot_RightToe);
+
+        broadcaster.sendTransform(Pelvis_LeftUpperLeg_f1);
+        broadcaster.sendTransform(LeftUpperLeg_f1_LeftUpperLeg_f2);
+        broadcaster.sendTransform(LeftUpperLeg_f2_LeftUpperLeg);
+        broadcaster.sendTransform(LeftUpperLeg_LeftLowerLeg_f1);
+        broadcaster.sendTransform(LeftLowerLeg_f1_LeftLowerLeg);
+        broadcaster.sendTransform(LeftLowerLeg_LeftFoot_f1);
+        broadcaster.sendTransform(LeftFoot_f1_LeftFoot_f2);
+        broadcaster.sendTransform(LeftFoot_f2_LeftFoot);
+        broadcaster.sendTransform(LeftFoot_LeftToe);
 
         // This will adjust as needed per iteration
         loop_rate.sleep();

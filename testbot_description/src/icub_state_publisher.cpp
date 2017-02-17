@@ -216,9 +216,9 @@ int main(int argc, char **argv){
         ground_to_base_H = ground_to_base_i.asHomogeneousTransform();
 
         ground_to_base.header.stamp = ros::Time::now();
-        ground_to_base.transform.translation.x = (ground_to_base_H.getVal(0,3))-0.18;
-        ground_to_base.transform.translation.y = (ground_to_base_H.getVal(1,3))-0.08;
-        ground_to_base.transform.translation.z = (ground_to_base_H.getVal(2,3))+0.08;
+        ground_to_base.transform.translation.x = (ground_to_base_H.getVal(0,3))-0.16;
+        ground_to_base.transform.translation.y = (ground_to_base_H.getVal(1,3))-0.04;
+        ground_to_base.transform.translation.z = (ground_to_base_H.getVal(2,3))+0.03;
         iDynTree::Rotation ground_to_base_rot   (ground_to_base_H.getVal(0,0),
                                                  ground_to_base_H.getVal(0,1),
                                                  ground_to_base_H.getVal(0,2),
@@ -611,7 +611,7 @@ inline iDynTree::MatrixDynSize matrixFromMatlabExtractor(std::string matName, in
     //     iDynTree::MatrixDynSize robotStateLeftArm_i = matrixFromMatlabExtractor("robot.mat", 4,"robot","data","q","leftArm");
     //     iDynTree::MatrixDynSize robotStateLeftLeg_i = matrixFromMatlabExtractor("robot.mat", 4,"robot","data","q","leftLeg");
     //     iDynTree::MatrixDynSize robotStateTorso_i = matrixFromMatlabExtractor("robot.mat", 4,"robot","data","q","torso");
-    
+
     iDynTree::MatrixDynSize mat_i;
     const char *name;
     va_list vl;
@@ -724,12 +724,12 @@ inline iDynTree::MatrixDynSize matrixFromMatlabExtractor(std::string matName, in
 }
 
 inline std::vector< iDynTree::MatrixDynSize > suitLinksFromMatlabExtractor_byString(std::string matVarName, std::string matVarString){
-    
+
     std::vector<std::string> matFields = split(matVarString, '/');
     int n = matFields.size();
     const char *varName = matFields[0].c_str();
     const char *fieldName = matFields[1].c_str();
-    
+
     mat_t *pSuit;
     pSuit = Mat_Open(getAbsModelPath(matVarName).c_str(),MAT_ACC_RDONLY);
     iDynTree::assertTrue(pSuit!=NULL);
@@ -738,21 +738,21 @@ inline std::vector< iDynTree::MatrixDynSize > suitLinksFromMatlabExtractor_byStr
     suitVar = Mat_VarRead(pSuit,varName);
     iDynTree::assertTrue(suitVar != NULL);
 
-    
+
     matvar_t *linksVar;
     linksVar = Mat_VarGetStructFieldByName(suitVar,fieldName,0);
     iDynTree::assertTrue(linksVar != NULL);
-    
-    matvar_t *linkCell; 
+
+    matvar_t *linkCell;
     std::vector< std::string > linksName;
     linksName.resize(linksVar->dims[0]);
-    
+
     std::vector< iDynTree::MatrixDynSize > linksPositions;
     linksPositions.resize(linksVar->dims[0]);
-    
+
     matvar_t *temp;
     matvar_t *tempMeas;
-    
+
     for(int i=0; i < linksVar->dims[0] ;++i){
 
 	linkCell = Mat_VarGetCell(linksVar, i);
@@ -774,53 +774,53 @@ inline std::vector< iDynTree::MatrixDynSize > suitLinksFromMatlabExtractor_byStr
 	toEigen(linksPositions[i]) = tempMapPosition;
 
     }
-    
+
     return linksPositions;
 
 }
 inline std::vector< iDynTree::MatrixDynSize > suitQuaternionsFromMatlabExtractor_byString(std::string matVarName, std::string matVarString){
-    
+
     std::vector<std::string> matFields = split(matVarString, '/');
     int n = matFields.size();
     const char *varName = matFields[0].c_str();
     const char *fieldName = matFields[1].c_str();
-    
+
     mat_t *pSuit;
     pSuit = Mat_Open(getAbsModelPath(matVarName).c_str(),MAT_ACC_RDONLY);
     iDynTree::assertTrue(pSuit!=NULL);
-    
+
     matvar_t *suitVar;
     suitVar = Mat_VarRead(pSuit,varName);
     iDynTree::assertTrue(suitVar != NULL);
-    
-    
+
+
     matvar_t *linksVar;
     linksVar = Mat_VarGetStructFieldByName(suitVar,fieldName,0);
     iDynTree::assertTrue(linksVar != NULL);
-    
+
     matvar_t *linkCell;
     std::vector< std::string > linksName;
     linksName.resize(linksVar->dims[0]);
 
     std::vector< iDynTree::MatrixDynSize > linksQuaternions;
     linksQuaternions.resize(linksVar->dims[0]);
-    
+
     matvar_t *temp;
     matvar_t *tempMeas;
-    
+
     for(int i=0; i < linksVar->dims[0] ;++i){
-	
+
 	linkCell = Mat_VarGetCell(linksVar, i);
-	
+
 	//Get Name
 	temp = Mat_VarGetStructFieldByName(linkCell,"label", 0);
 	iDynTree::assertTrue(temp != NULL);
 	linksName[i] =(char*) temp->data;
-	
+
 	//Get meas
 	tempMeas = Mat_VarGetStructFieldByName(linkCell,"meas", 0);
 	iDynTree::assertTrue(tempMeas != NULL);
-	
+
 	//Get orientations
 	temp = Mat_VarGetStructFieldByName(tempMeas,"orientation", 0);
 	iDynTree::assertTrue(temp != NULL);
@@ -828,7 +828,7 @@ inline std::vector< iDynTree::MatrixDynSize > suitQuaternionsFromMatlabExtractor
 	linksQuaternions[i].resize(temp->dims[0], temp->dims[1]);
 	toEigen(linksQuaternions[i]) = tempMapOrientation;
     }
-    
+
     return linksQuaternions;
-    
+
 }
